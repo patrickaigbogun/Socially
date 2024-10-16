@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 const redirectUri: string = import.meta.env.VITE_REDIRECT_URI;
