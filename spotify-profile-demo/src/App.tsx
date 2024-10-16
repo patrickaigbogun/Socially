@@ -30,7 +30,6 @@ export interface Image {
 
 const App: React.FC = () => {
     const [profile, setProfile] = useState<UserProfile | null>(null);
-    const [accessToken, setAccessToken] = useState<string | null>(null);
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -42,7 +41,6 @@ const App: React.FC = () => {
             } else {
                 try {
                     const tokens = await getAccessToken(clientId, code);
-                    setAccessToken(tokens.access_token);
                     const profileData = await fetchProfile(tokens.access_token);
                     setProfile(profileData);
                     console.log("Access Token:", tokens.access_token);
