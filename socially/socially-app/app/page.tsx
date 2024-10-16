@@ -1,8 +1,12 @@
+'use client';
+
+import { Authorise } from "./auth/spotify";
 
 
 
 
 export default function Home() {
+
 	return (
 		<>
 			<section className="bg-black space-y-9 h-screen font-bold text-white p-4" >
