@@ -56,7 +56,7 @@ const App: React.FC = () => {
 	async function redirectToAuthCodeFlow(clientId: string) {
 		const verifier = generateCodeVerifier(128);
 		const challenge = await generateCodeChallenge(verifier);
-		localStorage.setItem("verifier", verifier); // Ensure this line is executed
+		sessionStorage.setItem("verifier", verifier); // Ensure this line is executed
 
 		const params = new URLSearchParams();
 		params.append("client_id", clientId);
@@ -89,7 +89,7 @@ const App: React.FC = () => {
 	}
 
 	async function getAccessToken(clientId: string, code: string): Promise<{ access_token: string; refresh_token: string }> {
-		const verifier = localStorage.getItem("verifier");
+		const verifier = sessionStorage.getItem("verifier");
 		if (!verifier) {
 			throw new Error("Verifier not found in localStorage.");
 		}
@@ -122,14 +122,14 @@ const App: React.FC = () => {
 		const { access_token, refresh_token } = await result.json();
 
 		// Store the tokens in local storage
-		localStorage.setItem('access_token', access_token);
-		localStorage.setItem('refresh_token', refresh_token);
+		sessionStorage.setItem('access_token', access_token);
+		sessionStorage.setItem('refresh_token', refresh_token);
 
 		return { access_token, refresh_token };
 	}
 
 	async function getRefreshToken() {
-		const refreshToken = localStorage.getItem('refresh_token');
+		const refreshToken = sessionStorage.getItem('refresh_token');
 		const url = "https://accounts.spotify.com/api/token";
 
 		const payload = {
@@ -151,7 +151,7 @@ const App: React.FC = () => {
 		}
 
 		const data = await response.json();
-		localStorage.setItem('access_token', data.access_token);
+		sessionStorage.setItem('access_token', data.access_token);
 
 		return data.access_token;
 	}
