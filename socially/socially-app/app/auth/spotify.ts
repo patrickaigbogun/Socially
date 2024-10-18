@@ -1,5 +1,5 @@
 
 
 export async function Authorise() {
-    return 'rick rolled bitch'
+    return console.log('rick rolled bitch')
 }
